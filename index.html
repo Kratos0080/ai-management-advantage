@@ -2352,24 +2352,35 @@
             <line x1="80" y1="50" x2="80" y2="300" stroke="rgba(148,163,184,0.3)" stroke-width="2"/>
             <line x1="80" y1="300" x2="550" y2="300" stroke="rgba(148,163,184,0.3)" stroke-width="2"/>
 
-            <!-- Bar 1: Predicted (teal) UP -->
-            <rect x="120" y="55" width="80" height="120" fill="#2dd4bf" opacity="0.8"/>
-            <text x="160" y="320" font-size="11" fill="#94a3b8" text-anchor="middle">Predicted</text>
-            <text x="160" y="35" font-size="13" fill="#2dd4bf" font-weight="bold" text-anchor="middle">+24%</text>
+            <!-- Zero line (explicit) -->
+            <line x1="80" y1="175" x2="550" y2="175" stroke="rgba(148,163,184,0.3)" stroke-width="1"/>
 
-            <!-- Bar 2: Actual (red) DOWN -->
-            <rect x="240" y="212" width="80" height="95" fill="#ef4444" opacity="0.8"/>
-            <text x="280" y="320" font-size="11" fill="#94a3b8" text-anchor="middle">Actual</text>
-            <text x="280" y="320" font-size="13" fill="#ef4444" font-weight="bold" text-anchor="middle"></text>
-            <text x="280" y="330" font-size="13" fill="#ef4444" font-weight="bold" text-anchor="middle">-19%</text>
+            <!-- Bar 1: Predicted (teal) UP — 24% × 3.75px = 90px above zero -->
+            <rect x="120" y="85" width="80" height="90" fill="#2dd4bf" opacity="0.8"/>
+            <text x="160" y="320" font-size="11" fill="#94a3b8" text-anchor="middle">
+              <tspan data-en>Predicted</tspan><tspan data-zh>预测效果</tspan>
+            </text>
+            <text x="160" y="72" font-size="13" fill="#2dd4bf" font-weight="bold" text-anchor="middle">+24%</text>
 
-            <!-- Bar 3: Self-reported (amber) UP -->
+            <!-- Bar 2: Actual (red) DOWN — 19% × 3.75px = 71px below zero -->
+            <rect x="240" y="175" width="80" height="71" fill="#ef4444" opacity="0.8"/>
+            <text x="280" y="320" font-size="11" fill="#94a3b8" text-anchor="middle">
+              <tspan data-en>Actual</tspan><tspan data-zh>实际效果</tspan>
+            </text>
+            <text x="280" y="260" font-size="13" fill="#ef4444" font-weight="bold" text-anchor="middle">-19%</text>
+
+            <!-- Bar 3: Self-reported (amber) UP — 20% × 3.75px = 75px above zero -->
             <rect x="360" y="100" width="80" height="75" fill="#fbbf24" opacity="0.8"/>
-            <text x="400" y="320" font-size="11" fill="#94a3b8" text-anchor="middle">Self-Reported</text>
-            <text x="400" y="35" font-size="13" fill="#fbbf24" font-weight="bold" text-anchor="middle">+20%</text>
+            <text x="400" y="320" font-size="11" fill="#94a3b8" text-anchor="middle">
+              <tspan data-en>Self-Reported</tspan><tspan data-zh>自评效果</tspan>
+            </text>
+            <text x="400" y="87" font-size="13" fill="#fbbf24" font-weight="bold" text-anchor="middle">+20%</text>
 
             <!-- Caption -->
-            <text x="300" y="340" font-size="10" fill="rgba(148,163,184,0.5)" text-anchor="middle">METR Study, July 2025 — Experienced developers using frontier AI tools</text>
+            <text x="300" y="340" font-size="10" fill="rgba(148,163,184,0.5)" text-anchor="middle">
+              <tspan data-en>METR Study, July 2025 — Experienced developers using frontier AI tools</tspan>
+              <tspan data-zh>METR 研究, 2025年7月 — 使用前沿AI工具的资深开发者</tspan>
+            </text>
           </svg>
           <div class="dd-reality-caption">
             <span data-en>The perception gap was total. Developers believed they were faster while actually being slower.</span>
@@ -2439,25 +2450,37 @@
             <span data-zh>如果管理能力是杠杆，而其分布极不均衡，那么AI工具将制造巨大的结果不平等。BCG的"面向未来"企业——仅占总数5%——三年总股东回报是落后者的3.6倍。差距还在扩大。</span>
           </p>
 
-          <!-- Simple divergence visualization -->
-          <svg class="dd-reality-divergence" viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
-            <!-- Base line -->
-            <line x1="50" y1="75" x2="550" y2="75" stroke="rgba(148,163,184,0.2)" stroke-width="1" stroke-dasharray="5,5"/>
+          <!-- Divergence visualization — redesigned -->
+          <svg class="dd-reality-divergence" viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg">
+            <!-- Baseline dashed line -->
+            <line x1="60" y1="90" x2="540" y2="90" stroke="rgba(148,163,184,0.25)" stroke-width="1.5" stroke-dasharray="8,6"/>
+            <text x="545" y="94" font-size="10" fill="rgba(148,163,184,0.5)" text-anchor="start">
+              <tspan data-en>Baseline</tspan><tspan data-zh>基准线</tspan>
+            </text>
 
-            <!-- Left arrow (5% winners) -->
-            <path d="M 100 75 L 150 40" stroke="#2dd4bf" stroke-width="4" fill="none" stroke-linecap="round"/>
-            <polygon points="150,40 145,50 155,48" fill="#2dd4bf"/>
-            <text x="100" y="25" font-size="12" fill="#2dd4bf" font-weight="bold" text-anchor="middle">Top 5%</text>
-            <text x="100" y="65" font-size="11" fill="rgba(148,163,184,0.7)" text-anchor="middle">+3.6x TSR</text>
+            <!-- Top 5% — upward trajectory -->
+            <path d="M 80 90 Q 150 85, 200 55 T 320 15" stroke="#2dd4bf" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <polygon points="320,15 308,22 312,30" fill="#2dd4bf"/>
+            <text x="335" y="20" font-size="14" fill="#2dd4bf" font-weight="bold" text-anchor="start">
+              <tspan data-en>Top 5%</tspan><tspan data-zh>领先5%</tspan>
+            </text>
+            <text x="335" y="38" font-size="11" fill="rgba(148,163,184,0.7)" text-anchor="start">+3.6× TSR</text>
 
-            <!-- Right arrow (95% laggards) -->
-            <path d="M 500 75 L 450 110" stroke="#ef4444" stroke-width="4" fill="none" stroke-linecap="round"/>
-            <polygon points="450,110 455,100 445,102" fill="#ef4444"/>
-            <text x="500" y="125" font-size="12" fill="#ef4444" font-weight="bold" text-anchor="middle">Laggards (95%)</text>
-            <text x="500" y="85" font-size="11" fill="rgba(148,163,184,0.7)" text-anchor="middle">Baseline</text>
+            <!-- Laggards 95% — downward trajectory -->
+            <path d="M 80 90 Q 150 95, 200 120 T 320 165" stroke="#ef4444" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <polygon points="320,165 308,158 312,150" fill="#ef4444"/>
+            <text x="335" y="162" font-size="14" fill="#ef4444" font-weight="bold" text-anchor="start">
+              <tspan data-en>Laggards (95%)</tspan><tspan data-zh>落后者 (95%)</tspan>
+            </text>
+            <text x="335" y="178" font-size="11" fill="rgba(148,163,184,0.7)" text-anchor="start">
+              <tspan data-en>Diminishing returns</tspan><tspan data-zh>收益递减</tspan>
+            </text>
 
-            <!-- Center label -->
-            <text x="300" y="95" font-size="10" fill="rgba(148,163,184,0.5)" text-anchor="middle">The gap is widening</text>
+            <!-- Center gap annotation -->
+            <line x1="280" y1="35" x2="280" y2="145" stroke="rgba(148,163,184,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+            <text x="280" y="100" font-size="10" fill="rgba(148,163,184,0.4)" text-anchor="middle" font-style="italic">
+              <tspan data-en>The gap is widening</tspan><tspan data-zh>差距持续扩大</tspan>
+            </text>
           </svg>
         </div>
       </div>
