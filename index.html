@@ -1,0 +1,2785 @@
+<!DOCTYPE html>
+<html lang="en" class="lang-en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Why management skills — not technical prowess — determine AI outcomes. Bilingual EN/ZH data visualization based on research from BCG, McKinsey, Wharton, and more.">
+  <title>Management Skills: The Real AI Advantage | Bilingual Analysis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================
+       CSS VARIABLES & DESIGN SYSTEM
+       ============================================ */
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: rgba(30, 41, 59, 0.7);
+      --bg-glass: rgba(255, 255, 255, 0.03);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-teal: #2dd4bf;
+      --accent-teal-dark: #0d9488;
+      --accent-amber: #fbbf24;
+      --accent-red: #ef4444;
+      --accent-emerald: #10b981;
+      --font-display: 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --border-subtle: rgba(148, 163, 184, 0.1);
+      --glass-blur: 12px;
+    }
+
+    /* ============================================
+       LANGUAGE TOGGLE VISIBILITY
+       ============================================ */
+    html.lang-en [data-zh] {
+      display: none;
+    }
+    html.lang-en [data-en] {
+      display: inline;
+    }
+    html.lang-zh [data-en] {
+      display: none;
+    }
+    html.lang-zh [data-zh] {
+      display: inline;
+    }
+
+    /* SVG language visibility */
+    svg [data-zh] {
+      display: none;
+    }
+    svg [data-en] {
+      display: inline;
+    }
+    html.lang-zh svg [data-en] {
+      display: none;
+    }
+    html.lang-zh svg [data-zh] {
+      display: inline;
+    }
+
+    /* ============================================
+       GLOBAL RESET & BASE STYLES
+       ============================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    [id] {
+      scroll-margin-top: 2rem;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      line-height: 1.8;
+      font-weight: 400;
+      overflow-x: hidden;
+    }
+
+    /* ============================================
+       LANGUAGE TOGGLE BUTTON (Fixed Top-Right)
+       ============================================ */
+    .lang-toggle {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      z-index: 1000;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(var(--glass-blur));
+      color: var(--text-primary);
+      padding: 0.75rem 1.25rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      font-family: var(--font-display);
+    }
+
+    .lang-toggle:hover {
+      background: rgba(45, 212, 191, 0.1);
+      border-color: var(--accent-teal);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================
+       BACK-TO-TOP BUTTON
+       ============================================ */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 999;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent-teal);
+      border: 2px solid var(--accent-teal);
+      color: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+      opacity: 0;
+      visibility: hidden;
+      box-shadow: 0 8px 24px rgba(45, 212, 191, 0.3);
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--accent-teal-dark);
+      border-color: var(--accent-teal-dark);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(45, 212, 191, 0.4);
+    }
+
+    /* ============================================
+       FADE-UP ANIMATION (Scroll Trigger)
+       ============================================ */
+    @keyframes fadeUpIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-up {
+      animation: fadeUpIn 0.8s ease-out forwards;
+    }
+
+    /* ============================================
+       BOUNCE ARROW ANIMATION
+       ============================================ */
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(10px);
+      }
+    }
+
+    .bounce {
+      animation: bounce 2s infinite;
+    }
+
+    /* ============================================
+       HERO SECTION
+       ============================================ */
+    .ex-hero {
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      position: relative;
+      padding: 120px 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Subtle geometric background pattern */
+    .ex-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(45, 212, 191, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(45, 212, 191, 0.03) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .ex-hero__content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+
+    .ex-hero__eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+      margin-bottom: 1.5rem;
+    }
+
+    .ex-hero__title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .ex-hero__subtitle {
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+    }
+
+    .ex-hero__scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      z-index: 2;
+    }
+
+    .ex-hero__arrow {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    /* ============================================
+       DATA GAP SECTION
+       ============================================ */
+    .ex-data-gap {
+      background-color: var(--bg-primary);
+      padding: 6rem 2rem;
+    }
+
+    .ex-data-gap__header {
+      text-align: center;
+      margin-bottom: 4rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .ex-data-gap__title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .ex-data-gap__subtitle {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .ex-data-gap__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .ex-stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-left: 3px solid var(--accent-teal);
+      backdrop-filter: blur(var(--glass-blur));
+      border-radius: 12px;
+      padding: 2rem;
+      opacity: 0;
+    }
+
+    .ex-stat-card.fade-up {
+      opacity: 1;
+    }
+
+    .ex-stat-card--winners {
+      border-left-color: var(--accent-teal);
+    }
+
+    .ex-stat-card--losers {
+      border-left-color: var(--accent-amber);
+    }
+
+    .ex-stat-card--opportunity {
+      border-left-color: var(--accent-emerald);
+    }
+
+    .ex-stat-card__number {
+      font-size: 4rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .ex-stat-card--winners .ex-stat-card__number {
+      color: var(--accent-teal);
+    }
+
+    .ex-stat-card--losers .ex-stat-card__number {
+      color: var(--accent-amber);
+    }
+
+    .ex-stat-card--opportunity .ex-stat-card__number {
+      color: var(--accent-emerald);
+    }
+
+    .ex-stat-card__label {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .ex-stat-card__sub-stat {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .ex-stat-card__source {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ============================================
+       MANAGEMENT TRINITY SECTION
+       ============================================ */
+    .ex-trinity {
+      background-color: var(--bg-secondary);
+      padding: 6rem 2rem;
+    }
+
+    .ex-trinity__header {
+      text-align: center;
+      margin-bottom: 4rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .ex-trinity__title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .ex-trinity__subtitle {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .ex-trinity__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .ex-pillar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(var(--glass-blur));
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .ex-pillar.fade-up {
+      opacity: 1;
+    }
+
+    .ex-pillar:hover {
+      border-color: var(--accent-teal);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(45, 212, 191, 0.1);
+    }
+
+    .ex-pillar__icon {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 1.5rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .ex-pillar__icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: var(--accent-teal);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .ex-pillar__title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .ex-pillar__description {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ============================================
+       PIPELINE SECTION
+       ============================================ */
+    .ex-pipeline {
+      background-color: var(--bg-primary);
+      padding: 6rem 2rem;
+    }
+
+    .ex-pipeline__header {
+      text-align: center;
+      margin-bottom: 4rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .ex-pipeline__title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .ex-pipeline__subtitle {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .ex-pipeline__diagram {
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 3rem;
+    }
+
+    .ex-pipeline__diagram svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ============================================
+       DEEP DIVE NAVIGATION
+       ============================================ */
+    .ex-nav-deepdive {
+      background-color: var(--bg-secondary);
+      padding: 4rem 2rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .ex-nav-deepdive__links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 2rem;
+    }
+
+    .ex-nav-deepdive__link {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .ex-nav-deepdive__link:hover {
+      background: rgba(45, 212, 191, 0.1);
+      border-color: var(--accent-teal);
+      color: var(--accent-teal);
+    }
+
+    .ex-nav-deepdive__divider {
+      height: 1px;
+      background: var(--border-subtle);
+      max-width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 1.5rem;
+    }
+
+    .ex-nav-deepdive__hint {
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    /* ============================================================================
+       DEEP DIVE SECTIONS — SHARED STYLES
+       ============================================================================ */
+
+    .dd-section {
+      position: relative;
+      padding: 5rem 2rem;
+      margin: 0 auto;
+      max-width: 1400px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .dd-section:nth-child(odd) {
+      background-color: var(--bg-primary);
+    }
+
+    .dd-section:nth-child(even) {
+      background-color: var(--bg-secondary);
+    }
+
+    .dd-section:last-of-type {
+      border-bottom: none;
+    }
+
+    .dd-section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+      opacity: 0;
+    }
+
+    .dd-section-header.fade-up {
+      animation: fadeUpIn 0.8s ease-out forwards;
+    }
+
+    .dd-section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      letter-spacing: -1px;
+    }
+
+    .dd-section-subtitle {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ============================================================================
+       SECTION F: TECHNOLOGY TIMELINE
+       ============================================================================ */
+
+    .dd-timeline-container {
+      position: relative;
+      padding: 2rem 0;
+    }
+
+    /* Central vertical line */
+    .dd-timeline-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent-teal), transparent);
+      transform: translateX(-1px);
+    }
+
+    .dd-timeline-entries {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dd-timeline-entry {
+      display: flex;
+      margin-bottom: 4rem;
+      opacity: 0;
+    }
+
+    .dd-timeline-entry.fade-up {
+      animation: fadeUpIn 0.8s ease-out forwards;
+    }
+
+    .dd-timeline-entry:nth-child(1) { animation-delay: 0.1s; }
+    .dd-timeline-entry:nth-child(2) { animation-delay: 0.2s; }
+    .dd-timeline-entry:nth-child(3) { animation-delay: 0.3s; }
+    .dd-timeline-entry:nth-child(4) { animation-delay: 0.4s; }
+    .dd-timeline-entry:nth-child(5) { animation-delay: 0.5s; }
+    .dd-timeline-entry:nth-child(6) { animation-delay: 0.6s; }
+    .dd-timeline-entry:nth-child(7) { animation-delay: 0.7s; }
+
+    /* Alternate left/right positioning */
+    .dd-timeline-entry:nth-child(odd) {
+      justify-content: flex-start;
+    }
+
+    .dd-timeline-entry:nth-child(even) {
+      justify-content: flex-end;
+    }
+
+    .dd-timeline-content {
+      width: calc(50% - 3rem);
+      position: relative;
+    }
+
+    .dd-timeline-dot {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 3px solid var(--bg-primary);
+      top: 1.5rem;
+      z-index: 2;
+    }
+
+    .dd-timeline-entry:nth-child(odd) .dd-timeline-dot {
+      right: -59px;
+    }
+
+    .dd-timeline-entry:nth-child(even) .dd-timeline-dot {
+      left: -59px;
+    }
+
+    .dd-timeline-dot.teal {
+      background: var(--accent-teal);
+      box-shadow: 0 0 12px rgba(45, 212, 191, 0.4);
+    }
+
+    .dd-timeline-dot.amber {
+      background: var(--accent-amber);
+      box-shadow: 0 0 12px rgba(251, 191, 36, 0.4);
+    }
+
+    .dd-timeline-dot.red {
+      background: var(--accent-red);
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+    }
+
+    .dd-timeline-dot.emerald {
+      background: var(--accent-emerald);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+    }
+
+    .dd-timeline-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+    }
+
+    .dd-timeline-card:hover {
+      border-color: rgba(148, 163, 184, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .dd-timeline-date {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--accent-teal);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.75rem;
+    }
+
+    .dd-timeline-card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .dd-timeline-card-body {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+
+    .dd-timeline-source {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Highlight box for demo */
+    .dd-timeline-highlight {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(45, 212, 191, 0.1));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 3rem;
+      opacity: 0;
+    }
+
+    .dd-timeline-highlight.fade-up {
+      animation: fadeUpIn 0.8s ease-out forwards;
+    }
+
+    .dd-timeline-highlight-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent-emerald);
+      margin-bottom: 1rem;
+    }
+
+    .dd-timeline-highlight-body {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Mobile: stack everything vertically */
+    @media (max-width: 767px) {
+      .dd-timeline-line {
+        left: 30px;
+      }
+
+      .dd-timeline-entry {
+        justify-content: flex-start !important;
+        margin-bottom: 3rem;
+      }
+
+      .dd-timeline-content {
+        width: calc(100% - 80px);
+        margin-left: 60px;
+      }
+
+      .dd-timeline-dot {
+        left: 12px !important;
+        right: auto !important;
+      }
+
+      .dd-timeline-card {
+        padding: 1.5rem;
+      }
+
+      .dd-timeline-card-title {
+        font-size: 1.1rem;
+      }
+
+      .dd-section-title {
+        font-size: 1.75rem;
+      }
+    }
+
+    /* ============================================================================
+       SECTION G: EXPERT VOICES
+       ============================================================================ */
+
+    .dd-experts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .dd-expert-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 2.5rem;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      opacity: 0;
+    }
+
+    .dd-expert-card.fade-up {
+      animation: fadeUpIn 0.8s ease-out forwards;
+    }
+
+    .dd-expert-card:nth-child(1) { animation-delay: 0.1s; }
+    .dd-expert-card:nth-child(2) { animation-delay: 0.2s; }
+    .dd-expert-card:nth-child(3) { animation-delay: 0.3s; }
+
+    .dd-expert-card:hover {
+      border-color: rgba(148, 163, 184, 0.2);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .dd-expert-header {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .dd-expert-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--text-primary);
+      flex-shrink: 0;
+      border: 2px solid var(--border-subtle);
+    }
+
+    .dd-expert-avatar.teal {
+      background: rgba(45, 212, 191, 0.15);
+      border-color: var(--accent-teal);
+    }
+
+    .dd-expert-avatar.amber {
+      background: rgba(251, 191, 36, 0.15);
+      border-color: var(--accent-amber);
+    }
+
+    .dd-expert-avatar.emerald {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: var(--accent-emerald);
+    }
+
+    .dd-expert-info h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0 0 0.25rem 0;
+    }
+
+    .dd-expert-title {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .dd-expert-quote {
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--accent-teal);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      padding-left: 1rem;
+      border-left: 3px solid var(--accent-teal);
+    }
+
+    .dd-expert-context {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: var(--bg-glass);
+      border-radius: 8px;
+    }
+
+    .dd-expert-insight-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .dd-expert-insight {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .dd-expert-framework {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .dd-framework-pill {
+      padding: 0.5rem 1rem;
+      background: var(--bg-glass);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    @media (max-width: 767px) {
+      .dd-experts-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dd-expert-card {
+        padding: 1.75rem;
+      }
+    }
+
+    /* ============================================================================
+       SECTION H: SUCCESS VS. FAILURE
+       ============================================================================ */
+
+    .dd-cases-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .dd-cases-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .dd-cases-column.winners {
+      border-left: 4px solid var(--accent-teal);
+      padding-left: 2rem;
+    }
+
+    .dd-cases-column.losers {
+      border-left: 4px solid var(--accent-red);
+      padding-left: 2rem;
+    }
+
+    .dd-case-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem;
+      backdrop-filter: blur(12px);
+      opacity: 0;
+    }
+
+    .dd-case-card.fade-up {
+      animation: fadeUpIn 0.8s ease-out forwards;
+    }
+
+    .dd-cases-column.winners .dd-case-card:nth-child(1) { animation-delay: 0.1s; }
+    .dd-cases-column.winners .dd-case-card:nth-child(2) { animation-delay: 0.2s; }
+    .dd-cases-column.winners .dd-case-card:nth-child(3) { animation-delay: 0.3s; }
+    .dd-cases-column.losers .dd-case-card:nth-child(1) { animation-delay: 0.15s; }
+    .dd-cases-column.losers .dd-case-card:nth-child(2) { animation-delay: 0.25s; }
+    .dd-cases-column.losers .dd-case-card:nth-child(3) { animation-delay: 0.35s; }
+
+    .dd-case-card:hover {
+      border-color: rgba(148, 163, 184, 0.2);
+      transform: translateY(-4px);
+    }
+
+    .dd-case-metric {
+      font-size: 0.9rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent-teal), var(--accent-emerald));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.75rem;
+    }
+
+    .dd-cases-column.losers .dd-case-metric {
+      background: linear-gradient(90deg, var(--accent-red), var(--accent-amber));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .dd-case-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .dd-case-body {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .dd-cases-callout {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(251, 191, 36, 0.1));
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      opacity: 0;
+    }
+
+    .dd-cases-callout.fade-up {
+      animation: fadeUpIn 0.8s ease-out forwards;
+      animation-delay: 0.4s;
+    }
+
+    .dd-cases-callout-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .dd-cases-callout-body {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .dd-cases-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .dd-cases-stat {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .dd-cases-stat::before {
+      content: '•';
+      color: var(--accent-red);
+      font-weight: bold;
+    }
+
+    @media (max-width: 767px) {
+      .dd-cases-container {
+        grid-template-columns: 1fr;
+      }
+
+      .dd-cases-column {
+        gap: 1rem;
+      }
+
+      .dd-case-card {
+        padding: 1.25rem;
+      }
+
+      .dd-cases-callout {
+        padding: 1.5rem;
+      }
+    }
+
+    /* ============================================================================
+       SECTION I: THE UNCOMFORTABLE TRUTH
+       ============================================================================ */
+
+    .dd-reality-blocks {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .dd-reality-block {
+      opacity: 0;
+    }
+
+    .dd-reality-block.fade-up {
+      animation: fadeUpIn 0.8s ease-out forwards;
+    }
+
+    .dd-reality-block:nth-child(1) { animation-delay: 0.1s; }
+    .dd-reality-block:nth-child(2) { animation-delay: 0.2s; }
+    .dd-reality-block:nth-child(3) { animation-delay: 0.3s; }
+    .dd-reality-block:nth-child(4) { animation-delay: 0.4s; }
+
+    .dd-reality-chart {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .dd-reality-chart-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .dd-reality-chart-svg {
+      width: 100%;
+      height: auto;
+      margin-bottom: 1.5rem;
+    }
+
+    .dd-reality-caption {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .dd-reality-dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .dd-stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem;
+      backdrop-filter: blur(12px);
+      text-align: center;
+      opacity: 0;
+    }
+
+    .dd-stat-card.fade-up {
+      animation: fadeUpIn 0.8s ease-out forwards;
+    }
+
+    .dd-stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent-teal), var(--accent-amber));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.75rem;
+    }
+
+    .dd-stat-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .dd-reality-text-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .dd-reality-text-block p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .dd-reality-divergence {
+      width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+
+    .dd-reality-hype-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .dd-reality-hype-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .dd-reality-hype-body {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 767px) {
+      .dd-reality-blocks {
+        gap: 2rem;
+      }
+
+      .dd-reality-chart,
+      .dd-reality-text-block,
+      .dd-reality-hype-block {
+        padding: 1.5rem;
+      }
+
+      .dd-stat-value {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* ============================================================================
+       SECTION J: ORGANIZATIONAL ROADMAP
+       ============================================================================ */
+
+    .dd-org-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .dd-org-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      opacity: 0;
+    }
+
+    .dd-org-card.fade-up {
+      animation: fadeUpIn 0.8s ease-out forwards;
+    }
+
+    .dd-org-card:nth-child(1) { animation-delay: 0.1s; }
+    .dd-org-card:nth-child(2) { animation-delay: 0.2s; }
+    .dd-org-card:nth-child(3) { animation-delay: 0.3s; }
+
+    .dd-org-card:hover {
+      border-color: rgba(148, 163, 184, 0.2);
+      transform: translateY(-8px);
+    }
+
+    .dd-org-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+    }
+
+    .dd-org-card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .dd-org-before-after {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: var(--bg-glass);
+      border-radius: 8px;
+    }
+
+    .dd-org-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .dd-org-item {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      padding-left: 1rem;
+      border-left: 2px solid var(--accent-teal);
+    }
+
+    .dd-org-body {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .dd-org-quote {
+      font-size: 0.9rem;
+      color: var(--accent-teal);
+      font-style: italic;
+      margin-top: 1rem;
+      padding: 0.75rem;
+      background: var(--bg-glass);
+      border-radius: 6px;
+      border-left: 3px solid var(--accent-teal);
+    }
+
+    @media (max-width: 767px) {
+      .dd-org-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .dd-org-card {
+        padding: 1.5rem;
+      }
+    }
+
+    /* ============================================================================
+       SECTION K: THE 10/20/70 FRAMEWORK
+       ============================================================================ */
+
+    .dd-framework-charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .dd-framework-chart {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      text-align: center;
+      opacity: 0;
+    }
+
+    .dd-framework-chart.fade-up {
+      animation: fadeUpIn 0.8s ease-out forwards;
+    }
+
+    .dd-framework-chart:nth-child(1) { animation-delay: 0.1s; }
+    .dd-framework-chart:nth-child(2) { animation-delay: 0.2s; }
+
+    .dd-framework-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2rem;
+    }
+
+    .dd-framework-svg {
+      width: 100%;
+      height: 300px;
+      margin-bottom: 1rem;
+    }
+
+    .dd-framework-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .dd-framework-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .dd-framework-legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .dd-framework-insight {
+      background: var(--bg-glass);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: left;
+      opacity: 0;
+    }
+
+    .dd-framework-insight.fade-up {
+      animation: fadeUpIn 0.8s ease-out forwards;
+      animation-delay: 0.3s;
+    }
+
+    .dd-framework-insight-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .dd-framework-insight-body {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .dd-framework-source {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    @media (max-width: 767px) {
+      .dd-framework-charts {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .dd-framework-chart {
+        padding: 1.5rem;
+      }
+
+      .dd-framework-insight {
+        padding: 1.5rem;
+      }
+    }
+
+    /* ============================================================================
+       FOOTER
+       ============================================================================ */
+
+    .dd-footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+      padding: 3rem 2rem;
+      text-align: center;
+      opacity: 0;
+    }
+
+    .dd-footer.fade-up {
+      animation: fadeUpIn 0.8s ease-out forwards;
+    }
+
+    .dd-footer-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .dd-footer-source {
+      color: var(--accent-teal);
+      font-weight: 500;
+    }
+
+    /* ============================================
+       RESPONSIVE DESIGN
+       ============================================ */
+    @media (max-width: 768px) {
+      .ex-hero {
+        padding: 60px 1.5rem;
+        min-height: auto;
+      }
+
+      .ex-hero__title {
+        font-size: 2rem;
+      }
+
+      .ex-hero__subtitle {
+        font-size: 1rem;
+      }
+
+      .ex-data-gap,
+      .ex-trinity,
+      .ex-pipeline {
+        padding: 3rem 1.5rem;
+      }
+
+      .ex-data-gap__title,
+      .ex-trinity__title,
+      .ex-pipeline__title {
+        font-size: 1.5rem;
+      }
+
+      .ex-stat-card__number {
+        font-size: 3rem;
+      }
+
+      .ex-trinity__grid,
+      .ex-data-gap__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ex-pillar {
+        text-align: center;
+      }
+
+      .ex-nav-deepdive__links {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .ex-nav-deepdive__link {
+        width: 100%;
+        text-align: center;
+      }
+
+      .dd-section {
+        padding: 3rem 1.5rem;
+      }
+    }
+
+    /* ============================================
+       UTILITIES
+       ============================================ */
+    .text-center {
+      text-align: center;
+    }
+
+    .opacity-0 {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- ========================================
+       LANGUAGE TOGGLE
+       ======================================== -->
+  <button class="lang-toggle" id="langToggle">
+    <span data-en>中文</span>
+    <span data-zh>English</span>
+  </button>
+
+  <!-- ========================================
+       BACK-TO-TOP BUTTON
+       ======================================== -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <!-- ========================================
+       HERO SECTION
+       ======================================== -->
+  <section class="ex-hero" id="hero">
+    <div class="ex-hero__content">
+      <div class="ex-hero__eyebrow">
+        <span data-en>ANALYSIS</span>
+        <span data-zh>深度分析</span>
+      </div>
+      <h1 class="ex-hero__title">
+        <span data-en>Your Management Skills Are the Real AI Advantage</span>
+        <span data-zh>管理能力才是AI时代的真正优势</span>
+      </h1>
+      <p class="ex-hero__subtitle">
+        <span data-en>The real competitive advantage in AI deployment is not engineering capability — it is management discipline. Delegation, clear briefing, and quality evaluation now determine AI outcomes more than any technical skill.</span>
+        <span data-zh>AI部署的真正竞争优势不在于工程能力，而在于管理纪律。授权、清晰的任务交代、质量评估——如今比任何技术能力更能决定AI的成效。</span>
+      </p>
+    </div>
+
+    <div class="ex-hero__scroll-indicator">
+      <svg class="ex-hero__arrow bounce" viewBox="0 0 24 24">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ========================================
+       DATA GAP SECTION
+       ======================================== -->
+  <section class="ex-data-gap" id="data-gap">
+    <div class="ex-data-gap__header">
+      <h2 class="ex-data-gap__title">
+        <span data-en>The Data Gap</span>
+        <span data-zh>数据鸿沟</span>
+      </h2>
+      <p class="ex-data-gap__subtitle">
+        <span data-en>Where AI promise meets organizational reality</span>
+        <span data-zh>AI的承诺与组织现实的碰撞</span>
+      </p>
+    </div>
+
+    <div class="ex-data-gap__grid">
+      <!-- Card 1: Winners -->
+      <div class="ex-stat-card ex-stat-card--winners">
+        <div class="ex-stat-card__number">1.5×</div>
+        <div class="ex-stat-card__label">
+          <span data-en>revenue growth for AI leaders</span>
+          <span data-zh>AI领先企业的收入增长倍数</span>
+        </div>
+        <div class="ex-stat-card__sub-stat">
+          <span data-en>1.6× shareholder returns</span>
+          <span data-zh>1.6×股东回报</span>
+        </div>
+        <div class="ex-stat-card__source">BCG, 2026</div>
+      </div>
+
+      <!-- Card 2: Losers -->
+      <div class="ex-stat-card ex-stat-card--losers">
+        <div class="ex-stat-card__number">74%</div>
+        <div class="ex-stat-card__label">
+          <span data-en>of companies report zero tangible AI value</span>
+          <span data-zh>的企业至今未获得可衡量的AI价值</span>
+        </div>
+        <div class="ex-stat-card__sub-stat">
+          <span data-en>despite widespread deployment</span>
+          <span data-zh>尽管已广泛部署</span>
+        </div>
+        <div class="ex-stat-card__source">BCG, 2026</div>
+      </div>
+
+      <!-- Card 3: Opportunity -->
+      <div class="ex-stat-card ex-stat-card--opportunity">
+        <div class="ex-stat-card__number">95%</div>
+        <div class="ex-stat-card__label">
+          <span data-en>time savings on information compilation</span>
+          <span data-zh>信息汇总任务的时间节省</span>
+        </div>
+        <div class="ex-stat-card__sub-stat">
+          <span data-en>50–70% faster time-to-insight</span>
+          <span data-zh>洞察周期缩短50–70%</span>
+        </div>
+        <div class="ex-stat-card__source">Anthropic / Bridgewater</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       MANAGEMENT TRINITY SECTION
+       ======================================== -->
+  <section class="ex-trinity" id="trinity">
+    <div class="ex-trinity__header">
+      <h2 class="ex-trinity__title">
+        <span data-en>The Management Trinity</span>
+        <span data-zh>管理三支柱</span>
+      </h2>
+      <p class="ex-trinity__subtitle">
+        <span data-en>Three skills that determine AI outcomes</span>
+        <span data-zh>决定AI成效的三项关键能力</span>
+      </p>
+    </div>
+
+    <div class="ex-trinity__grid">
+      <!-- Pillar 1: Delegation -->
+      <div class="ex-pillar">
+        <div class="ex-pillar__icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2 L12 12 M12 12 L6 18 M12 12 L18 18"></path>
+            <circle cx="12" cy="12" r="8" opacity="0.3"></circle>
+          </svg>
+        </div>
+        <h3 class="ex-pillar__title">
+          <span data-en>Delegation</span>
+          <span data-zh>授权</span>
+        </h3>
+        <p class="ex-pillar__description">
+          <span data-en>Decompose complex work into discrete, well-scoped tasks an AI agent can own end-to-end. Not 'write me a report' — but 'reconcile Q4 costs across three entities using GAAP, flag variances above 5%.'</span>
+          <span data-zh>将复杂工作拆解为AI代理可端到端承担的明确任务。不是'帮我写份报告'——而是'按GAAP标准核对三个实体的Q4成本，标记偏差超过5%的项目。'</span>
+        </p>
+      </div>
+
+      <!-- Pillar 2: Clear Briefing -->
+      <div class="ex-pillar">
+        <div class="ex-pillar__icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 4 L20 4 L20 18 L4 18 Z"></path>
+            <line x1="4" y1="8" x2="20" y2="8"></line>
+            <line x1="4" y1="12" x2="16" y2="12"></line>
+            <line x1="4" y1="16" x2="14" y2="16"></line>
+          </svg>
+        </div>
+        <h3 class="ex-pillar__title">
+          <span data-en>Clear Briefing</span>
+          <span data-zh>清晰指示</span>
+        </h3>
+        <p class="ex-pillar__description">
+          <span data-en>Provide the full context an agent needs: constraints, examples, standards, institutional knowledge. This is not prompt engineering — it is management communication, encoded for machines.</span>
+          <span data-zh>提供代理执行所需的完整上下文：约束条件、示例、标准、机构知识。这不是 Prompt Engineering——而是面向机器编码的管理沟通。</span>
+        </p>
+      </div>
+
+      <!-- Pillar 3: Quality Evaluation -->
+      <div class="ex-pillar">
+        <div class="ex-pillar__icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2 L15 8 L22 8 L17 13 L19 19 L12 15 L5 19 L7 13 L2 8 L9 8 Z"></path>
+          </svg>
+        </div>
+        <h3 class="ex-pillar__title">
+          <span data-en>Quality Evaluation</span>
+          <span data-zh>质量评估</span>
+        </h3>
+        <p class="ex-pillar__description">
+          <span data-en>Judge output against professional standards before deployment. Domain expertise — knowing what 'good' looks like in your function — is the irreplaceable human layer.</span>
+          <span data-zh>在部署前依据专业标准判断产出质量。领域专长——知道你所在职能中'好'的标准——是不可替代的人类判断层。</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PIPELINE SECTION
+       ======================================== -->
+  <section class="ex-pipeline" id="pipeline">
+    <div class="ex-pipeline__header">
+      <h2 class="ex-pipeline__title">
+        <span data-en>The Evolution</span>
+        <span data-zh>技术演进</span>
+      </h2>
+      <p class="ex-pipeline__subtitle">
+        <span data-en>From single prompts to agent swarms</span>
+        <span data-zh>从单一提示到代理群体协作</span>
+      </p>
+    </div>
+
+    <div class="ex-pipeline__diagram">
+      <svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Stage 1 -->
+        <g>
+          <rect x="50" y="80" width="200" height="140" rx="8" fill="rgba(148, 163, 184, 0.1)" stroke="#64748b" stroke-width="2"/>
+          <text x="150" y="120" font-size="18" font-weight="700" fill="#f1f5f9" text-anchor="middle">
+            <tspan data-en>Prompt</tspan>
+            <tspan data-zh>提示</tspan>
+          </text>
+          <text x="150" y="142" font-size="16" font-weight="700" fill="#f1f5f9" text-anchor="middle">
+            <tspan data-en>Engineering</tspan>
+            <tspan data-zh>工程</tspan>
+          </text>
+          <text x="150" y="168" font-size="12" fill="#94a3b8" text-anchor="middle" font-style="italic">2024</text>
+          <text x="150" y="195" font-size="11" fill="#94a3b8" text-anchor="middle">
+            <tspan data-en>Craft one</tspan>
+            <tspan data-zh>编写单一</tspan>
+          </text>
+          <text x="150" y="208" font-size="11" fill="#94a3b8" text-anchor="middle">
+            <tspan data-en>instruction</tspan>
+            <tspan data-zh>指令</tspan>
+          </text>
+        </g>
+
+        <!-- Arrow 1 -->
+        <path d="M 260 150 L 310 150" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead-muted)"/>
+
+        <!-- Stage 2 -->
+        <g>
+          <rect x="320" y="80" width="200" height="140" rx="8" fill="rgba(45, 212, 191, 0.05)" stroke="#0d9488" stroke-width="2"/>
+          <text x="420" y="120" font-size="18" font-weight="700" fill="#f1f5f9" text-anchor="middle">
+            <tspan data-en>Context</tspan>
+            <tspan data-zh>上下文</tspan>
+          </text>
+          <text x="420" y="142" font-size="16" font-weight="700" fill="#f1f5f9" text-anchor="middle">
+            <tspan data-en>Engineering</tspan>
+            <tspan data-zh>工程</tspan>
+          </text>
+          <text x="420" y="168" font-size="12" fill="#2dd4bf" text-anchor="middle" font-style="italic">Mid-2025</text>
+          <text x="420" y="195" font-size="11" fill="#94a3b8" text-anchor="middle">
+            <tspan data-en>Assemble</tspan>
+            <tspan data-zh>组装完整</tspan>
+          </text>
+          <text x="420" y="208" font-size="11" fill="#94a3b8" text-anchor="middle">
+            <tspan data-en>full environment</tspan>
+            <tspan data-zh>环境</tspan>
+          </text>
+          <text x="420" y="245" font-size="9" fill="#64748b" text-anchor="middle">Tobi Lutke & Andrej Karpathy</text>
+        </g>
+
+        <!-- Arrow 2 -->
+        <path d="M 530 150 L 580 150" stroke="#0d9488" stroke-width="2" fill="none" marker-end="url(#arrowhead-bright)"/>
+
+        <!-- Stage 3 -->
+        <g>
+          <circle cx="690" cy="105" r="25" fill="rgba(45, 212, 191, 0.1)" stroke="#2dd4bf" stroke-width="2"/>
+          <circle cx="630" cy="160" r="25" fill="rgba(45, 212, 191, 0.1)" stroke="#2dd4bf" stroke-width="2"/>
+          <circle cx="750" cy="160" r="25" fill="rgba(45, 212, 191, 0.1)" stroke="#2dd4bf" stroke-width="2"/>
+
+          <!-- Connecting lines -->
+          <line x1="670" y1="120" x2="640" y2="150" stroke="#2dd4bf" stroke-width="1.5" opacity="0.6"/>
+          <line x1="710" y1="120" x2="740" y2="150" stroke="#2dd4bf" stroke-width="1.5" opacity="0.6"/>
+          <line x1="640" y1="185" x2="740" y2="185" stroke="#2dd4bf" stroke-width="1.5" opacity="0.6"/>
+
+          <text x="690" y="120" font-size="14" font-weight="700" fill="#f1f5f9" text-anchor="middle">
+            <tspan data-en>Agent</tspan>
+            <tspan data-zh>代理</tspan>
+          </text>
+          <text x="690" y="170" font-size="14" font-weight="700" fill="#f1f5f9" text-anchor="middle">
+            <tspan data-en>Swarming</tspan>
+            <tspan data-zh>群体</tspan>
+          </text>
+          <text x="690" y="235" font-size="12" fill="#2dd4bf" font-weight="600" text-anchor="middle">2026</text>
+
+          <text x="690" y="260" font-size="10" fill="#94a3b8" text-anchor="middle">100 sub-agents · 1,500 tool calls</text>
+          <text x="690" y="275" font-size="10" fill="#94a3b8" text-anchor="middle">80% runtime reduction</text>
+        </g>
+
+        <!-- Arrow markers -->
+        <defs>
+          <marker id="arrowhead-muted" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#64748b"/>
+          </marker>
+          <marker id="arrowhead-bright" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#2dd4bf"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ========================================
+       DEEP DIVE NAVIGATION
+       ======================================== -->
+  <section class="ex-nav-deepdive" id="nav-deepdive">
+    <div class="ex-nav-deepdive__links">
+      <a href="#timeline" class="ex-nav-deepdive__link">
+        <span data-en>Timeline</span>
+        <span data-zh>时间线</span>
+      </a>
+      <a href="#experts" class="ex-nav-deepdive__link">
+        <span data-en>Expert Voices</span>
+        <span data-zh>专家观点</span>
+      </a>
+      <a href="#cases" class="ex-nav-deepdive__link">
+        <span data-en>Case Studies</span>
+        <span data-zh>案例研究</span>
+      </a>
+      <a href="#reality" class="ex-nav-deepdive__link">
+        <span data-en>Reality Check</span>
+        <span data-zh>现实检验</span>
+      </a>
+      <a href="#org-roadmap" class="ex-nav-deepdive__link">
+        <span data-en>Org Roadmap</span>
+        <span data-zh>组织路线图</span>
+      </a>
+      <a href="#framework" class="ex-nav-deepdive__link">
+        <span data-en>Framework</span>
+        <span data-zh>实施框架</span>
+      </a>
+    </div>
+
+    <div class="ex-nav-deepdive__divider"></div>
+
+    <div class="ex-nav-deepdive__hint">
+      <span data-en>Scroll to explore the full analysis ↓</span>
+      <span data-zh>向下滚动探索完整分析 ↓</span>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       SECTION F: TECHNOLOGY TIMELINE
+       ============================================================================ -->
+  <section class="dd-section" id="timeline">
+    <div class="dd-section-header">
+      <h2 class="dd-section-title">
+        <span data-en>The Technology Arc: 2024–2026</span>
+        <span data-zh>技术演进弧线：2024–2026</span>
+      </h2>
+      <p class="dd-section-subtitle">
+        <span data-en>How AI leapt from chatbots to autonomous agent teams</span>
+        <span data-zh>AI如何从聊天机器人跃升至自主代理团队</span>
+      </p>
+    </div>
+
+    <div class="dd-timeline-container">
+      <div class="dd-timeline-line"></div>
+      <div class="dd-timeline-entries">
+        <!-- Entry 1 -->
+        <div class="dd-timeline-entry">
+          <div class="dd-timeline-content">
+            <div class="dd-timeline-dot teal"></div>
+            <div class="dd-timeline-card">
+              <div class="dd-timeline-date">
+                <span data-en>Q1 2024 → Q2 2025</span>
+                <span data-zh>2024年Q1 → 2025年Q2</span>
+              </div>
+              <div class="dd-timeline-card-title">
+                <span data-en>Multi-agent inquiries surge 14×</span>
+                <span data-zh>多代理咨询量暴增14倍</span>
+              </div>
+              <div class="dd-timeline-card-body">
+                <span data-en>Client inquiries about multi-agent systems surged more than fourteen-fold, according to Gartner — signaling enterprise recognition that single-agent workflows cannot handle organizational complexity.</span>
+                <span data-zh>据Gartner数据，客户对多代理系统的咨询量增长超过14倍——标志着企业认识到单一代理工作流无法应对组织复杂性。</span>
+              </div>
+              <div class="dd-timeline-source">
+                <span data-en>Source: Gartner</span>
+                <span data-zh>来源：Gartner</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entry 2 -->
+        <div class="dd-timeline-entry">
+          <div class="dd-timeline-content">
+            <div class="dd-timeline-dot amber"></div>
+            <div class="dd-timeline-card">
+              <div class="dd-timeline-date">
+                <span data-en>March 2025</span>
+                <span data-zh>2025年3月</span>
+              </div>
+              <div class="dd-timeline-card-title">
+                <span data-en>Manus: First general-purpose AI agent</span>
+                <span data-zh>Manus：首个通用AI代理</span>
+              </div>
+              <div class="dd-timeline-card-body">
+                <span data-en>Singapore-based startup launches the first general-purpose AI agent — capable of understanding high-level goals and executing across multiple tools without step-by-step guidance. Meta acquires it for $2B+ in December 2025.</span>
+                <span data-zh>新加坡初创企业推出首个通用AI代理——能理解高层目标并在多个工具间自主执行，无需逐步引导。Meta于2025年12月以超20亿美元收购。</span>
+              </div>
+              <div class="dd-timeline-source"><span data-en>Source: Meta public announcement</span><span data-zh>来源：Meta公开声明</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entry 3 -->
+        <div class="dd-timeline-entry">
+          <div class="dd-timeline-content">
+            <div class="dd-timeline-dot teal"></div>
+            <div class="dd-timeline-card">
+              <div class="dd-timeline-date">
+                <span data-en>November 2025</span>
+                <span data-zh>2025年11月</span>
+              </div>
+              <div class="dd-timeline-card-title">
+                <span data-en>Gemini 3 Pro: 1M-token context window</span>
+                <span data-zh>Gemini 3 Pro：100万token上下文窗口</span>
+              </div>
+              <div class="dd-timeline-card-body">
+                <span data-en>Google ships a 1-million-token context window — enough to hold an entire codebase or a year of financial reports in working memory, making multi-document agent analysis dramatically more practical.</span>
+                <span data-zh>Google推出100万token上下文窗口——足以将整个代码库或一年的财务报告纳入工作记忆，令多文档代理分析变得切实可行。</span>
+              </div>
+              <div class="dd-timeline-source"><span data-en>Source: Google official</span><span data-zh>来源：Google官方发布</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entry 4 -->
+        <div class="dd-timeline-entry">
+          <div class="dd-timeline-content">
+            <div class="dd-timeline-dot red"></div>
+            <div class="dd-timeline-card">
+              <div class="dd-timeline-date">
+                <span data-en>January 12, 2026</span>
+                <span data-zh>2026年1月12日</span>
+              </div>
+              <div class="dd-timeline-card-title">
+                <span data-en>Claude Cowork launches</span>
+                <span data-zh>Claude Cowork正式推出</span>
+              </div>
+              <div class="dd-timeline-card-body">
+                <span data-en>Anthropic ships autonomous AI for non-technical users: point it at a folder, describe what you need, let it work. Plugin support arrives January 30 — software stocks fall $285 billion.</span>
+                <span data-zh>Anthropic面向非技术用户推出自主AI工具：指向文件夹、描述需求、自动执行。1月30日插件上线——软件股市值蒸发2,850亿美元。</span>
+              </div>
+              <div class="dd-timeline-source"><span data-en>Source: Anthropic; Thomson Reuters, RELX, LegalZoom market data</span><span data-zh>来源：Anthropic；汤森路透、RELX、LegalZoom市场数据</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entry 5 -->
+        <div class="dd-timeline-entry">
+          <div class="dd-timeline-content">
+            <div class="dd-timeline-dot teal"></div>
+            <div class="dd-timeline-card">
+              <div class="dd-timeline-date">
+                <span data-en>January 27, 2026</span>
+                <span data-zh>2026年1月27日</span>
+              </div>
+              <div class="dd-timeline-card-title">
+                <span data-en>Kimi K2.5: Native agent swarming</span>
+                <span data-zh>Kimi K2.5：原生代理群集编排</span>
+              </div>
+              <div class="dd-timeline-card-body">
+                <span data-en>1-trillion-parameter open-source model orchestrating up to 100 sub-agents, executing 1,500 coordinated tool calls, cutting runtime by 80%. Open-source release makes multi-agent coordination a baseline expectation.</span>
+                <span data-zh>万亿参数开源模型，可编排多达100个子代理、执行1,500个协调工具调用、运行时间缩短80%。开源发布使多代理协调成为基准期望。</span>
+              </div>
+              <div class="dd-timeline-source"><span data-en>Source: Moonshot AI official release</span><span data-zh>来源：月之暗面官方发布</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entry 6 -->
+        <div class="dd-timeline-entry">
+          <div class="dd-timeline-content">
+            <div class="dd-timeline-dot teal"></div>
+            <div class="dd-timeline-card">
+              <div class="dd-timeline-date">
+                <span data-en>February 5, 2026</span>
+                <span data-zh>2026年2月5日</span>
+              </div>
+              <div class="dd-timeline-card-title">
+                <span data-en>Claude Code Agent Teams</span>
+                <span data-zh>Claude Code代理团队</span>
+              </div>
+              <div class="dd-timeline-card-body">
+                <span data-en>Multiple independent AI instances communicate through shared task lists — peer-to-peer coordination rather than hierarchical control. A fundamentally different architecture from Kimi's centralized orchestration.</span>
+                <span data-zh>多个独立AI实例通过共享任务列表通信——对等协调而非层级控制。与Kimi的集中编排形成根本不同的架构范式。</span>
+              </div>
+              <div class="dd-timeline-source"><span data-en>Source: Anthropic official</span><span data-zh>来源：Anthropic官方</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entry 7 / Highlight -->
+        <div class="dd-timeline-entry">
+          <div class="dd-timeline-content">
+            <div class="dd-timeline-dot emerald"></div>
+            <div class="dd-timeline-highlight">
+              <div class="dd-timeline-highlight-title">
+                <span data-en>Demo highlight: 16 agents build a C compiler</span>
+                <span data-zh>演示亮点：16个代理构建C编译器</span>
+              </div>
+              <div class="dd-timeline-highlight-body">
+                <span data-en>100,000 lines of Rust. 99% pass rate on the GCC test suite. Capable of compiling Linux 6.9. The agents decomposed modules, assigned responsibilities, ran tests, and iterated — operating like an engineering team.</span>
+                <span data-zh>10万行Rust代码。GCC测试套件99%通过率。能编译Linux 6.9内核。代理们分解模块、分配职责、运行测试、迭代改进——如同一支工程团队般运作。</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       SECTION G: EXPERT VOICES
+       ============================================================================ -->
+  <section class="dd-section" id="experts">
+    <div class="dd-section-header">
+      <h2 class="dd-section-title">
+        <span data-en>What the Experts Say</span>
+        <span data-zh>专家共识</span>
+      </h2>
+      <p class="dd-section-subtitle">
+        <span data-en>The academic and practitioner consensus</span>
+        <span data-zh>学术界与实践者的共同判断</span>
+      </p>
+    </div>
+
+    <div class="dd-experts-grid">
+      <!-- Expert 1: Ethan Mollick -->
+      <div class="dd-expert-card">
+        <div class="dd-expert-header">
+          <div class="dd-expert-avatar teal">EM</div>
+          <div class="dd-expert-info">
+            <h3><span data-en>Ethan Mollick</span><span data-zh>伊森·莫利克</span></h3>
+            <p class="dd-expert-title"><span data-en>Wharton</span><span data-zh>沃顿商学院</span></p>
+          </div>
+        </div>
+
+        <div class="dd-expert-quote">
+          <span data-en>"Management has always assumed scarcity: you delegate because you can't do everything yourself, and because talent is limited and expensive. AI changes the equation. Now the 'talent' is abundant and cheap. What's scarce is knowing what to ask for."</span>
+          <span data-zh>"管理学始终建立在稀缺性假设之上：你授权是因为无法事必躬亲，人才有限且昂贵。AI改变了这个等式。现在'人才'充裕且廉价。稀缺的是知道该要求什么。"</span>
+        </div>
+
+        <div class="dd-expert-context">
+          <span data-en>Published "Management as AI Superpower" (January 27, 2026). His executive MBA students — doctors, managers, corporate leaders — created startups in four days using AI tools, achieving results "an order of magnitude further along" than pre-AI cohorts.</span>
+          <span data-zh>发表《管理：AI超能力》（2026年1月27日）。其EMBA学员——医生、管理者、企业领导者——用AI工具在四天内创建了初创企业，成果较AI前的同期学员"领先一个数量级"。</span>
+        </div>
+
+        <div class="dd-expert-insight-label">
+          <span data-en>KEY INSIGHT</span>
+          <span data-zh>核心洞察</span>
+        </div>
+        <div class="dd-expert-insight">
+          <span data-en>Every profession has already invented delegation frameworks that work as AI instructions: PRDs, shot lists, Five Paragraph Orders, scoped engagements.</span>
+          <span data-zh>每个行业都已发明了可作为AI指令的授权框架：产品需求文档、拍摄清单、五段式命令、范围界定委托。</span>
+        </div>
+      </div>
+
+      <!-- Expert 2: Julie Zhuo -->
+      <div class="dd-expert-card">
+        <div class="dd-expert-header">
+          <div class="dd-expert-avatar amber">JZ</div>
+          <div class="dd-expert-info">
+            <h3><span data-en>Julie Zhuo</span><span data-zh>朱莉·周</span></h3>
+            <p class="dd-expert-title"><span data-en>Former VP Design, Meta</span><span data-zh>Meta前设计副总裁</span></p>
+          </div>
+        </div>
+
+        <div class="dd-expert-quote">
+          <span data-en>"The headcount shrinks, but the need to manage work doesn't."</span>
+          <span data-zh>"人数减少了，但管理工作的需求并没有减少。"</span>
+        </div>
+
+        <div class="dd-expert-context">
+          <span data-en>Maps her management framework — Purpose, People, Process — directly onto AI management. Pure middle-manager roles will decline, but management skills will only increase in demand.</span>
+          <span data-zh>将她的管理框架——目标、人才、流程——直接映射到AI管理。纯粹的中层管理岗位将减少，但管理技能的需求只会增加。</span>
+        </div>
+
+        <div class="dd-expert-insight-label">
+          <span data-en>FRAMEWORK</span>
+          <span data-zh>框架</span>
+        </div>
+        <div class="dd-expert-framework">
+          <div class="dd-framework-pill"><span data-en>Purpose</span><span data-zh>目标</span></div>
+          <div class="dd-framework-pill"><span data-en>People</span><span data-zh>人才</span></div>
+          <div class="dd-framework-pill"><span data-en>Process</span><span data-zh>流程</span></div>
+        </div>
+      </div>
+
+      <!-- Expert 3: Tobi Lütke -->
+      <div class="dd-expert-card">
+        <div class="dd-expert-header">
+          <div class="dd-expert-avatar emerald">TL</div>
+          <div class="dd-expert-info">
+            <h3><span data-en>Tobi Lütke</span><span data-zh>托比·卢特克</span></h3>
+            <p class="dd-expert-title"><span data-en>CEO, Shopify</span><span data-zh>Shopify首席执行官</span></p>
+          </div>
+        </div>
+
+        <div class="dd-expert-quote">
+          <span data-en>"Reflexive AI usage is now a baseline expectation at Shopify."</span>
+          <span data-zh>"在Shopify，自觉使用AI已成为基本要求。"</span>
+        </div>
+
+        <div class="dd-expert-context">
+          <span data-en>April 2025 memo made AI competency a performance-review criterion. Teams must demonstrate why they cannot accomplish goals with AI before requesting headcount — the first major company to formally encode AI proficiency into management expectations.</span>
+          <span data-zh>2025年4月备忘录将AI能力纳入绩效考核。团队在申请新增人员前必须证明为何无法通过AI达成目标——首家正式将AI能力写入管理考核的大型企业。</span>
+        </div>
+
+        <div class="dd-expert-insight-label">
+          <span data-en>IMPLICATION</span>
+          <span data-zh>含义</span>
+        </div>
+        <div class="dd-expert-insight">
+          <span data-en>AI proficiency is shifting from competitive advantage to baseline requirement.</span>
+          <span data-zh>AI能力从竞争优势转变为基本要求。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       SECTION H: SUCCESS VS. FAILURE
+       ============================================================================ -->
+  <section class="dd-section" id="cases">
+    <div class="dd-section-header">
+      <h2 class="dd-section-title">
+        <span data-en>Winners and Losers</span>
+        <span data-zh>成败分野</span>
+      </h2>
+      <p class="dd-section-subtitle">
+        <span data-en>The pattern is always the same: context quality determines outcome</span>
+        <span data-zh>规律始终如一：上下文质量决定结果</span>
+      </p>
+    </div>
+
+    <div class="dd-cases-container">
+      <!-- Winners Column -->
+      <div class="dd-cases-column winners">
+        <!-- Card 1: Salesforce Agentforce -->
+        <div class="dd-case-card">
+          <div class="dd-case-metric">
+            <span data-en>2.6M conversations · 63% autonomous resolution</span>
+            <span data-zh>260万次对话 · 63%自主解决率</span>
+          </div>
+          <div class="dd-case-title">
+            <span data-en>Salesforce Agentforce</span>
+            <span data-zh>Salesforce Agentforce</span>
+          </div>
+          <div class="dd-case-body">
+            <span data-en>Tightly grounded in company-specific data with clear escalation criteria.</span>
+            <span data-zh>严格基于公司特定数据，配合明确的升级标准。</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Klarna -->
+        <div class="dd-case-card">
+          <div class="dd-case-metric">
+            <span data-en>2.3M conversations · $40M projected savings</span>
+            <span data-zh>230万次对话 · 预期节省4000万美元</span>
+          </div>
+          <div class="dd-case-title">
+            <span data-en>Klarna</span>
+            <span data-zh>Klarna</span>
+          </div>
+          <div class="dd-case-body">
+            <span data-en>Equivalent to 700 full-time agents. Risk and finance teams encoded decision rules into the system.</span>
+            <span data-zh>相当于700名全职客服。风险和财务团队将决策规则编码入系统。</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Financial Services -->
+        <div class="dd-case-card">
+          <div class="dd-case-metric">
+            <span data-en>15 days → 35 minutes · $2,200 → $9 per report</span>
+            <span data-zh>15天 → 35分钟 · 每份报告成本$2,200 → $9</span>
+          </div>
+          <div class="dd-case-title">
+            <span data-en>Financial Services Firm</span>
+            <span data-zh>金融服务公司</span>
+          </div>
+          <div class="dd-case-body">
+            <span data-en>Management mapped their existing reporting process onto AI workflows step by step.</span>
+            <span data-zh>管理层将现有报告流程逐步映射至AI工作流。</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Losers Column -->
+      <div class="dd-cases-column losers">
+        <!-- Card 1: Air Canada -->
+        <div class="dd-case-card">
+          <div class="dd-case-metric">
+            <span data-en>Tribunal found airline fully liable</span>
+            <span data-zh>法庭判定航空公司完全责任</span>
+          </div>
+          <div class="dd-case-title">
+            <span data-en>Air Canada</span>
+            <span data-zh>加拿大航空</span>
+          </div>
+          <div class="dd-case-body">
+            <span data-en>Chatbot gave incorrect bereavement fare information — not grounded in actual company policy.</span>
+            <span data-zh>聊天机器人提供了错误的丧亲票价信息——未与实际公司政策对接。</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Cursor -->
+        <div class="dd-case-card">
+          <div class="dd-case-metric">
+            <span data-en>Fabricated refund policy triggered cancellations</span>
+            <span data-zh>虚构退款政策引发取消</span>
+          </div>
+          <div class="dd-case-title">
+            <span data-en>Cursor</span>
+            <span data-zh>Cursor</span>
+          </div>
+          <div class="dd-case-body">
+            <span data-en>AI support agent invented a fictional subscription policy with no access to authoritative documentation.</span>
+            <span data-zh>AI客服代理凭空编造了订阅退款政策，缺乏权威文档支撑。</span>
+          </div>
+        </div>
+
+        <!-- Card 3: McDonald's -->
+        <div class="dd-case-card">
+          <div class="dd-case-metric">
+            <span data-en>Drive-thru AI program retreated</span>
+            <span data-zh>撤回得来速AI项目</span>
+          </div>
+          <div class="dd-case-title">
+            <span data-en>McDonald's</span>
+            <span data-zh>麦当劳</span>
+          </div>
+          <div class="dd-case-body">
+            <span data-en>Could not handle accents or edge cases. Management didn't anticipate real-world interaction patterns.</span>
+            <span data-zh>无法处理口音和边缘情况。管理层未预见真实交互场景的复杂性。</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Callout Box -->
+      <div class="dd-cases-callout">
+        <div class="dd-cases-callout-title">
+          <span data-en>Root cause in every failure:</span>
+          <span data-zh>每次失败的根因：</span>
+        </div>
+        <div class="dd-cases-callout-body">
+          <span data-en>Not a bad model, but bad context — missing policy documents, absent guardrails, inadequate briefing.</span>
+          <span data-zh>不是模型不好，而是上下文不足——缺失政策文档、缺少防护栏、任务交代不充分。</span>
+        </div>
+        <div class="dd-cases-stats">
+          <div class="dd-cases-stat">
+            <span data-en>5% of custom AI tools reach production (MIT NANDA)</span>
+            <span data-zh>5%的定制AI工具投入生产（MIT NANDA）</span>
+          </div>
+          <div class="dd-cases-stat">
+            <span data-en>Agents fail at office tasks ~70% of the time (CMU/Salesforce)</span>
+            <span data-zh>代理在办公任务上失败率~70%（CMU/Salesforce）</span>
+          </div>
+          <div class="dd-cases-stat">
+            <span data-en>30% safety gap (IBM Research)</span>
+            <span data-zh>30%安全缺口（IBM研究）</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       SECTION I: THE UNCOMFORTABLE TRUTH
+       ============================================================================ -->
+  <section class="dd-section" id="reality">
+    <div class="dd-section-header">
+      <h2 class="dd-section-title">
+        <span data-en>The Uncomfortable Truth</span>
+        <span data-zh>不便的真相</span>
+      </h2>
+      <p class="dd-section-subtitle">
+        <span data-en>Honest assessment of AI's limits and risks</span>
+        <span data-zh>对AI局限与风险的诚实评估</span>
+      </p>
+    </div>
+
+    <div class="dd-reality-blocks">
+      <!-- Block 1: Perception Gap -->
+      <div class="dd-reality-block">
+        <div class="dd-reality-chart">
+          <div class="dd-reality-chart-title">
+            <span data-en>The Perception Gap</span>
+            <span data-zh>认知偏差</span>
+          </div>
+          <svg class="dd-reality-chart-svg" viewBox="0 0 600 350" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background -->
+            <rect width="600" height="350" fill="transparent"/>
+
+            <!-- Zero line -->
+            <line x1="80" y1="175" x2="550" y2="175" stroke="rgba(148,163,184,0.3)" stroke-width="2"/>
+
+            <!-- Grid lines -->
+            <line x1="80" y1="100" x2="550" y2="100" stroke="rgba(148,163,184,0.1)" stroke-width="1"/>
+            <line x1="80" y1="125" x2="550" y2="125" stroke="rgba(148,163,184,0.1)" stroke-width="1"/>
+            <line x1="80" y1="225" x2="550" y2="225" stroke="rgba(148,163,184,0.1)" stroke-width="1"/>
+            <line x1="80" y1="250" x2="550" y2="250" stroke="rgba(148,163,184,0.1)" stroke-width="1"/>
+
+            <!-- Y-axis labels -->
+            <text x="60" y="180" font-size="12" fill="rgba(148,163,184,0.6)" text-anchor="end">0%</text>
+            <text x="60" y="105" font-size="12" fill="rgba(148,163,184,0.6)" text-anchor="end">+20%</text>
+            <text x="60" y="255" font-size="12" fill="rgba(148,163,184,0.6)" text-anchor="end">-20%</text>
+
+            <!-- Axes -->
+            <line x1="80" y1="50" x2="80" y2="300" stroke="rgba(148,163,184,0.3)" stroke-width="2"/>
+            <line x1="80" y1="300" x2="550" y2="300" stroke="rgba(148,163,184,0.3)" stroke-width="2"/>
+
+            <!-- Bar 1: Predicted (teal) UP -->
+            <rect x="120" y="55" width="80" height="120" fill="#2dd4bf" opacity="0.8"/>
+            <text x="160" y="320" font-size="11" fill="#94a3b8" text-anchor="middle">Predicted</text>
+            <text x="160" y="35" font-size="13" fill="#2dd4bf" font-weight="bold" text-anchor="middle">+24%</text>
+
+            <!-- Bar 2: Actual (red) DOWN -->
+            <rect x="240" y="212" width="80" height="95" fill="#ef4444" opacity="0.8"/>
+            <text x="280" y="320" font-size="11" fill="#94a3b8" text-anchor="middle">Actual</text>
+            <text x="280" y="320" font-size="13" fill="#ef4444" font-weight="bold" text-anchor="middle"></text>
+            <text x="280" y="330" font-size="13" fill="#ef4444" font-weight="bold" text-anchor="middle">-19%</text>
+
+            <!-- Bar 3: Self-reported (amber) UP -->
+            <rect x="360" y="100" width="80" height="75" fill="#fbbf24" opacity="0.8"/>
+            <text x="400" y="320" font-size="11" fill="#94a3b8" text-anchor="middle">Self-Reported</text>
+            <text x="400" y="35" font-size="13" fill="#fbbf24" font-weight="bold" text-anchor="middle">+20%</text>
+
+            <!-- Caption -->
+            <text x="300" y="340" font-size="10" fill="rgba(148,163,184,0.5)" text-anchor="middle">METR Study, July 2025 — Experienced developers using frontier AI tools</text>
+          </svg>
+          <div class="dd-reality-caption">
+            <span data-en>The perception gap was total. Developers believed they were faster while actually being slower.</span>
+            <span data-zh>认知偏差是全面的。开发者自认为更快，实际上却更慢。</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Block 2: CEO Anxiety Dashboard -->
+      <div class="dd-reality-block">
+        <div class="dd-reality-dashboard">
+          <div class="dd-stat-card">
+            <div class="dd-stat-value">50%</div>
+            <div class="dd-stat-label">
+              <span data-en>of CEOs believe job stability depends on AI integration</span>
+              <span data-zh>的CEO认为职业稳定取决于AI整合</span>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem;">
+              <span data-en>BCG, Jan 2026</span>
+              <span data-zh>BCG, 2026年1月</span>
+            </div>
+          </div>
+
+          <div class="dd-stat-card">
+            <div class="dd-stat-value">60%</div>
+            <div class="dd-stat-label">
+              <span data-en>intentionally slowed AI implementation</span>
+              <span data-zh>有意放缓AI实施</span>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem;">
+              <span data-en>BCG, Jan 2026</span>
+              <span data-zh>BCG, 2026年1月</span>
+            </div>
+          </div>
+
+          <div class="dd-stat-card">
+            <div class="dd-stat-value">56%</div>
+            <div class="dd-stat-label">
+              <span data-en>report neither increased revenue nor lower costs</span>
+              <span data-zh>报告既未增收也未降本</span>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem;">
+              <span data-en>PwC, Jan 2026</span>
+              <span data-zh>普华永道, 2026年1月</span>
+            </div>
+          </div>
+
+          <div class="dd-stat-card">
+            <div class="dd-stat-value">64%</div>
+            <div class="dd-stat-label">
+              <span data-en>adopted AI before understanding its value</span>
+              <span data-zh>在理解价值前就采用了AI</span>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem;">
+              <span data-en>IBM, May 2025</span>
+              <span data-zh>IBM, 2025年5月</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Block 3: The Inequality Warning -->
+      <div class="dd-reality-block">
+        <div class="dd-reality-text-block">
+          <p>
+            <span data-en>If management skill is the lever, and it is unevenly distributed, AI tools will produce massive inequality in outcomes. BCG's "future-built" companies — just 5% of the total — achieve 3.6× three-year total shareholder returns compared to laggards. The gap is widening.</span>
+            <span data-zh>如果管理能力是杠杆，而其分布极不均衡，那么AI工具将制造巨大的结果不平等。BCG的"面向未来"企业——仅占总数5%——三年总股东回报是落后者的3.6倍。差距还在扩大。</span>
+          </p>
+
+          <!-- Simple divergence visualization -->
+          <svg class="dd-reality-divergence" viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
+            <!-- Base line -->
+            <line x1="50" y1="75" x2="550" y2="75" stroke="rgba(148,163,184,0.2)" stroke-width="1" stroke-dasharray="5,5"/>
+
+            <!-- Left arrow (5% winners) -->
+            <path d="M 100 75 L 150 40" stroke="#2dd4bf" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <polygon points="150,40 145,50 155,48" fill="#2dd4bf"/>
+            <text x="100" y="25" font-size="12" fill="#2dd4bf" font-weight="bold" text-anchor="middle">Top 5%</text>
+            <text x="100" y="65" font-size="11" fill="rgba(148,163,184,0.7)" text-anchor="middle">+3.6x TSR</text>
+
+            <!-- Right arrow (95% laggards) -->
+            <path d="M 500 75 L 450 110" stroke="#ef4444" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <polygon points="450,110 455,100 445,102" fill="#ef4444"/>
+            <text x="500" y="125" font-size="12" fill="#ef4444" font-weight="bold" text-anchor="middle">Laggards (95%)</text>
+            <text x="500" y="85" font-size="11" fill="rgba(148,163,184,0.7)" text-anchor="middle">Baseline</text>
+
+            <!-- Center label -->
+            <text x="300" y="95" font-size="10" fill="rgba(148,163,184,0.5)" text-anchor="middle">The gap is widening</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Block 4: Hype Cycle -->
+      <div class="dd-reality-block">
+        <div class="dd-reality-hype-block">
+          <div class="dd-reality-hype-title">
+            <span data-en>Hype Cycle Position</span>
+            <span data-zh>炒作周期位置</span>
+          </div>
+          <div class="dd-reality-hype-body">
+            <span data-en>Generative AI has moved from the Peak of Inflated Expectations to the Trough of Disillusionment. Gartner predicts 40%+ of agentic AI projects will be canceled by end of 2027.</span>
+            <span data-zh>生成式AI已从"过高期望的峰值"移至"幻灭的低谷"。Gartner预测到2027年底，40%以上的智能代理项目将被取消。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       SECTION J: ORGANIZATIONAL ROADMAP
+       ============================================================================ -->
+  <section class="dd-section" id="org-roadmap">
+    <div class="dd-section-header">
+      <h2 class="dd-section-title">
+        <span data-en>Three Structural Shifts</span>
+        <span data-zh>三大组织变革</span>
+      </h2>
+      <p class="dd-section-subtitle">
+        <span data-en>How AI reshapes the org chart</span>
+        <span data-zh>AI如何重塑组织架构</span>
+      </p>
+    </div>
+
+    <div class="dd-org-cards">
+      <!-- Card 1: Wider Spans of Control -->
+      <div class="dd-org-card">
+        <div class="dd-org-icon"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--accent-teal)" stroke-width="1.5"><path d="M12 4v16M4 12l4-4M4 12l4 4M20 12l-4-4M20 12l-4 4"/></svg></div>
+        <div class="dd-org-card-title">
+          <span data-en>Wider Spans of Control</span>
+          <span data-zh>更宽的管控范围</span>
+        </div>
+
+        <div class="dd-org-before-after">
+          <div>
+            <div class="dd-org-label">
+              <span data-en>Before</span>
+              <span data-zh>之前</span>
+            </div>
+            <div class="dd-org-item">
+              <span data-en>1 manager : 5-8 direct reports</span>
+              <span data-zh>1名管理者 : 5-8名直接下属</span>
+            </div>
+          </div>
+          <div>
+            <div class="dd-org-label">
+              <span data-en>After</span>
+              <span data-zh>之后</span>
+            </div>
+            <div class="dd-org-item">
+              <span data-en>1 manager : 10-15+ (with AI agents)</span>
+              <span data-zh>1名管理者 : 10-15+（含AI代理）</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dd-org-quote">
+          <span data-en>"How many digital workers can you manage?" — Wang Guanchun, CEO Laiye</span>
+          <span data-zh>"你能管理多少数字员工？"——来也科技CEO汪冠春</span>
+        </div>
+      </div>
+
+      <!-- Card 2: Flatter Hierarchies -->
+      <div class="dd-org-card">
+        <div class="dd-org-icon"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--accent-teal)" stroke-width="1.5"><rect x="3" y="6" width="18" height="3" rx="1"/><rect x="6" y="12" width="12" height="3" rx="1"/><rect x="9" y="18" width="6" height="3" rx="1"/></svg></div>
+        <div class="dd-org-card-title">
+          <span data-en>Flatter Hierarchies</span>
+          <span data-zh>更扁平的结构</span>
+        </div>
+
+        <div class="dd-org-before-after">
+          <div>
+            <div class="dd-org-label">
+              <span data-en>Before</span>
+              <span data-zh>之前</span>
+            </div>
+            <div class="dd-org-item">
+              <span data-en>8 layers: CEO → VP → Dir → Mgr → Sr IC → IC → Jr → Analyst</span>
+              <span data-zh>8层：CEO → VP → Dir → Mgr → Sr IC → IC → Jr → Analyst</span>
+            </div>
+          </div>
+          <div>
+            <div class="dd-org-label">
+              <span data-en>After</span>
+              <span data-zh>之后</span>
+            </div>
+            <div class="dd-org-item">
+              <span data-en>5-6 layers: AI handles routing, synthesis, status reporting</span>
+              <span data-zh>5-6层：AI处理路由、合成、状态报告</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dd-org-body">
+          <span data-en>What remains is the judgment layer: people who set direction, evaluate quality, and make decisions requiring domain expertise.</span>
+          <span data-zh>留下的是判断层：设定方向、评估质量、做出需要领域专长的决策的人。</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Rise of the Player-Coach -->
+      <div class="dd-org-card">
+        <div class="dd-org-icon"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--accent-teal)" stroke-width="1.5"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/><path d="M12 14v4M9 16h6"/></svg></div>
+        <div class="dd-org-card-title">
+          <span data-en>Rise of the Player-Coach</span>
+          <span data-zh>教练型参与者的崛起</span>
+        </div>
+
+        <div class="dd-org-body">
+          <span data-en>Not pure managers who coordinate, nor pure ICs who execute — but hybrids who review AI output with the expert eye of someone who knows exactly what their CFO, client, or board will question.</span>
+          <span data-zh>不是纯粹协调的管理者，也不是纯粹执行的个体贡献者——而是用专家眼光审视AI产出的复合型人才，他们精确预判CFO、客户或董事会会质疑什么。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       SECTION K: THE 10/20/70 FRAMEWORK
+       ============================================================================ -->
+  <section class="dd-section" id="framework">
+    <div class="dd-section-header">
+      <h2 class="dd-section-title">
+        <span data-en>Where to Invest</span>
+        <span data-zh>投资方向</span>
+      </h2>
+      <p class="dd-section-subtitle">
+        <span data-en>McKinsey's implementation framework — and why most get it wrong</span>
+        <span data-zh>麦肯锡的实施框架——以及多数企业为何做错了</span>
+      </p>
+    </div>
+
+    <div class="dd-framework-charts">
+      <!-- Chart 1: Winning Allocation -->
+      <div class="dd-framework-chart">
+        <div class="dd-framework-title">
+          <span data-en>Winning Allocation</span>
+          <span data-zh>成功分配</span>
+        </div>
+        <svg class="dd-framework-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <!-- Donut chart: 10% slate, 20% teal, 70% emerald -->
+          <circle cx="150" cy="150" r="120" fill="none" stroke="#64748b" stroke-width="45" stroke-dasharray="75.4 753.98" transform="rotate(-90 150 150)"/>
+          <circle cx="150" cy="150" r="120" fill="none" stroke="#2dd4bf" stroke-width="45" stroke-dasharray="150.8 753.98" stroke-dashoffset="-75.4" transform="rotate(-90 150 150)"/>
+          <circle cx="150" cy="150" r="120" fill="none" stroke="#10b981" stroke-width="45" stroke-dasharray="527.8 753.98" stroke-dashoffset="-226.2" transform="rotate(-90 150 150)"/>
+
+          <!-- Center circle for donut effect -->
+          <circle cx="150" cy="150" r="75" fill="#0f172a"/>
+
+          <!-- Center text -->
+          <text x="150" y="155" font-size="18" fill="#2dd4bf" font-weight="bold" text-anchor="middle">Winning</text>
+        </svg>
+        <div class="dd-framework-legend">
+          <div class="dd-framework-legend-item">
+            <div class="dd-framework-legend-color" style="background: #64748b;"></div>
+            <span><span data-en>10% Algorithms & Models</span><span data-zh>10% 算法与模型</span></span>
+          </div>
+          <div class="dd-framework-legend-item">
+            <div class="dd-framework-legend-color" style="background: #2dd4bf;"></div>
+            <span><span data-en>20% Infrastructure & Tools</span><span data-zh>20% 基础设施与工具</span></span>
+          </div>
+          <div class="dd-framework-legend-item">
+            <div class="dd-framework-legend-color" style="background: #10b981;"></div>
+            <span><span data-en>70% People & Process</span><span data-zh>70% 人才与流程</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart 2: Typical Allocation -->
+      <div class="dd-framework-chart">
+        <div class="dd-framework-title">
+          <span data-en>Typical Allocation</span>
+          <span data-zh>常见分配</span>
+        </div>
+        <svg class="dd-framework-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <!-- Donut chart: 40% slate, 40% teal, 20% amber -->
+          <circle cx="150" cy="150" r="120" fill="none" stroke="#64748b" stroke-width="45" stroke-dasharray="301.6 753.98" transform="rotate(-90 150 150)"/>
+          <circle cx="150" cy="150" r="120" fill="none" stroke="#2dd4bf" stroke-width="45" stroke-dasharray="301.6 753.98" stroke-dashoffset="-301.6" transform="rotate(-90 150 150)"/>
+          <circle cx="150" cy="150" r="120" fill="none" stroke="#fbbf24" stroke-width="45" stroke-dasharray="150.8 753.98" stroke-dashoffset="-603.2" transform="rotate(-90 150 150)"/>
+
+          <!-- Center circle for donut effect -->
+          <circle cx="150" cy="150" r="75" fill="#0f172a"/>
+
+          <!-- Center text -->
+          <text x="150" y="155" font-size="18" fill="#fbbf24" font-weight="bold" text-anchor="middle">Typical</text>
+        </svg>
+        <div class="dd-framework-legend">
+          <div class="dd-framework-legend-item">
+            <div class="dd-framework-legend-color" style="background: #64748b;"></div>
+            <span><span data-en>40% Algorithms & Models</span><span data-zh>40% 算法与模型</span></span>
+          </div>
+          <div class="dd-framework-legend-item">
+            <div class="dd-framework-legend-color" style="background: #2dd4bf;"></div>
+            <span><span data-en>40% Infrastructure & Tools</span><span data-zh>40% 基础设施与工具</span></span>
+          </div>
+          <div class="dd-framework-legend-item">
+            <div class="dd-framework-legend-color" style="background: #fbbf24;"></div>
+            <span><span data-en>20% People & Process</span><span data-zh>20% 人才与流程</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dd-framework-insight">
+      <div class="dd-framework-insight-title">
+        <span data-en>The Key Realization</span>
+        <span data-zh>关键认识</span>
+      </div>
+      <div class="dd-framework-insight-body">
+        <span data-en>Only 12% of companies achieve both revenue growth and cost reduction from AI. The common trait: they redesign workflows rather than layering AI onto existing processes.</span>
+        <span data-zh>仅12%的企业从AI中同时实现了收入增长和成本降低。共同特征：重新设计工作流程，而非在现有流程上叠加AI。</span>
+      </div>
+      <div class="dd-framework-source">
+        <span data-en>Source: PwC / McKinsey</span>
+        <span data-zh>来源：普华永道 / 麦肯锡</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       FOOTER
+       ============================================================================ -->
+  <footer class="dd-footer">
+    <div class="dd-footer-text">
+      <span data-en>Based on</span>
+      <span data-zh>基于</span>
+      <span class="dd-footer-source">
+        <span data-en>'Your Management Skills Are the Real AI Advantage'</span>
+        <span data-zh>《管理能力才是AI时代的真正优势》</span>
+      </span>
+      <span data-en>· Data from BCG, McKinsey, PwC, IBM, Gartner, Wharton, MIT, Stanford · 2026</span>
+      <span data-zh>· 数据来源：BCG、麦肯锡、普华永道、IBM、Gartner、沃顿商学院、MIT、斯坦福 · 2026</span>
+    </div>
+  </footer>
+
+  <!-- ========================================
+       JAVASCRIPT
+       ======================================== -->
+  <script>
+    // ==========================================
+    // Language Toggle
+    // ==========================================
+    const langToggle = document.getElementById('langToggle');
+    const htmlElement = document.documentElement;
+
+    langToggle.addEventListener('click', () => {
+      if (htmlElement.classList.contains('lang-en')) {
+        htmlElement.classList.remove('lang-en');
+        htmlElement.classList.add('lang-zh');
+        localStorage.setItem('preferredLanguage', 'zh');
+      } else {
+        htmlElement.classList.remove('lang-zh');
+        htmlElement.classList.add('lang-en');
+        localStorage.setItem('preferredLanguage', 'en');
+      }
+    });
+
+    // Load saved language preference
+    const savedLang = localStorage.getItem('preferredLanguage');
+    if (savedLang === 'zh') {
+      htmlElement.classList.remove('lang-en');
+      htmlElement.classList.add('lang-zh');
+    }
+
+    // ==========================================
+    // Back-to-Top Button
+    // ==========================================
+    const backToTopButton = document.getElementById('backToTop');
+    const heroSection = document.getElementById('hero');
+
+    window.addEventListener('scroll', () => {
+      const heroBottom = heroSection.getBoundingClientRect().bottom;
+      if (heroBottom < 0) {
+        backToTopButton.classList.add('show');
+      } else {
+        backToTopButton.classList.remove('show');
+      }
+    });
+
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // ==========================================
+    // Unified Intersection Observer for Fade-Up
+    // ==========================================
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-up');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animated elements from both executive and deep-dive sections
+    const elementsToObserve = document.querySelectorAll(
+      '.ex-stat-card, .ex-pillar, ' +
+      '.dd-timeline-entry, .dd-expert-card, .dd-case-card, .dd-reality-block, ' +
+      '.dd-stat-card, .dd-org-card, .dd-framework-chart, .dd-framework-insight, ' +
+      '.dd-cases-callout, .dd-section-header, .dd-timeline-highlight, .dd-footer'
+    );
+
+    elementsToObserve.forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
